@@ -113,16 +113,16 @@ setInterval(() => {
 
 const scenarioRows = [
   [
-    ["✓", "Perjalanan lancar", "Cek status di rute tersimpan sebelum berangkat ke stasiun."],
-    ["◷", "Kereta terlambat", "Lihat titik keterlambatan dan pengaruhnya pada waktu tiba."],
-    ["⚠", "Gangguan persinyalan", "Baca lokasi dan dampak gangguan untuk menentukan langkah berikutnya."],
-    ["⇄", "Moda alternatif", "Pertimbangkan moda lain kalau perjalanan perlu disesuaikan."],
+    ["Sebelum berangkat", "Perjalanan lancar", "Cek status di rute tersimpan sebelum berangkat ke stasiun."],
+    ["Perkiraan tiba", "Kereta terlambat", "Lihat titik keterlambatan dan pengaruhnya pada waktu tiba."],
+    ["Kondisi jalur", "Gangguan persinyalan", "Baca lokasi dan dampak gangguan untuk menentukan langkah berikutnya."],
+    ["Ubah rencana", "Moda alternatif", "Pertimbangkan moda lain kalau perjalanan perlu disesuaikan."],
   ],
   [
-    ["↔", "Rute pergi dan pulang", "Simpan perjalanan harian agar kabar di rute itu mudah dicek."],
-    ["⌕", "Cari rute baru", "Pilih lokasi dan stasiun tujuan yang berbeda."],
-    ["⌖", "Stasiun sekitar", "Temukan stasiun yang dekat dengan posisi kamu."],
-    ["◎", "Timeline perjalanan", "Lihat di mana laporan gangguan muncul dalam urutan stasiunmu."],
+    ["Perjalanan harian", "Rute pergi dan pulang", "Simpan perjalanan harian agar kabar di rute itu mudah dicek."],
+    ["Cari perjalanan", "Cari rute baru", "Pilih lokasi dan stasiun tujuan yang berbeda."],
+    ["Titik berangkat", "Stasiun sekitar", "Temukan stasiun yang dekat dengan posisi kamu."],
+    ["Urutan stasiun", "Timeline perjalanan", "Lihat di mana laporan gangguan muncul dalam urutan stasiunmu."],
   ],
 ];
 
@@ -134,18 +134,17 @@ function makeScenarioRow(row) {
   track.className = "ticker-track";
   const group = document.createElement("div");
   group.className = "ticker-group";
-  for (const [symbol, title, copy] of row) {
+  for (const [label, title, copy] of row) {
     const card = document.createElement("article");
     card.className = "scenario-card";
     const heading = document.createElement("b");
-    const mark = document.createElement("span");
-    mark.className = "scenario-mark";
-    mark.setAttribute("aria-hidden", "true");
-    mark.textContent = symbol;
+    const kicker = document.createElement("span");
+    kicker.className = "scenario-kicker";
+    kicker.textContent = label;
     heading.textContent = title;
     const body = document.createElement("p");
     body.textContent = copy;
-    card.append(mark, heading, body);
+    card.append(kicker, heading, body);
     group.append(card);
   }
   track.append(group);
