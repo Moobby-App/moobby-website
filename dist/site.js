@@ -176,7 +176,6 @@ function fitTickers() {
 const timeline = document.querySelector(".timeline-stage");
 const stickyPhone = document.querySelector(".timeline-sticky");
 const cards = [...document.querySelectorAll(".flight-slot")].map(slot => ({
-  slot,
   element: slot.querySelector(".flight-card"),
   direction: Number(slot.style.getPropertyValue("--direction")),
   drift: Number(slot.style.getPropertyValue("--drift")),
@@ -245,10 +244,10 @@ const ease = value => value * value * (3 - 2 * value);
 let trainProgress;
 let flightProgress;
 
-function follow(current, target) {
+function follow(current, target, rate = .24) {
   if (current === undefined || Math.abs(target - current) < .001) return target;
   scheduleScroll();
-  return current + (target - current) * .24;
+  return current + (target - current) * rate;
 }
 
 function updateScroll() {
@@ -256,8 +255,8 @@ function updateScroll() {
   if (!reduceMotion.matches) {
     const stageTop = showcase.getBoundingClientRect().top;
     const entry = innerHeight * .94;
-    const target = clampUnit((entry - stageTop) / (innerHeight * .76));
-    trainProgress = follow(trainProgress, target);
+    const target = clampUnit((entry - stageTop) / (innerHeight * .84));
+    trainProgress = follow(trainProgress, target, .14);
     showcase.style.setProperty("--train-remaining", 1 - ease(trainProgress));
   }
 
@@ -273,11 +272,10 @@ function updateScroll() {
     const target = clampUnit((entry - timeline.getBoundingClientRect().top) / distance);
     flightProgress = follow(flightProgress, target);
     const spread = Math.min(345, innerWidth * .22);
-    cards.forEach(({ slot, element, direction, drift }, index) => {
+    cards.forEach(({ element, direction, drift }, index) => {
       const position = ease(clampUnit((flightProgress - index * .044) / .64));
       const remaining = 1 - position;
       const arc = Math.sin(Math.PI * position) * 24;
-      slot.classList.toggle("landed", position === 1);
       element.style.setProperty("--flight-x", `${direction * spread * remaining}px`);
       element.style.setProperty("--flight-y", `${drift * remaining - arc}px`);
       element.style.setProperty("--flight-scale", 1 + remaining * .19);

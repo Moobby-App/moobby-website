@@ -103,7 +103,7 @@ summary { cursor: pointer; }
   inset: 39% -10% auto;
   height: 58px;
   transform: rotate(-8deg);
-  opacity: .42;
+  opacity: .22;
   background: linear-gradient(transparent 13px, #bbdcff 13px 16px, transparent 16px 40px, #bbdcff 40px 43px, transparent 43px),
     repeating-linear-gradient(90deg, transparent 0 18px, #c1ddf754 18px 23px, transparent 23px 38px);
 }
@@ -114,20 +114,22 @@ summary { cursor: pointer; }
 }
 .showcase-train {
   position: absolute;
-  width: min(480px, 56vw);
+  width: min(480px, 44vw);
+  --train-travel: calc(50vw + 55%);
+  opacity: calc(.42 - .28 * var(--train-remaining, 1));
   height: auto;
   z-index: 1;
   pointer-events: none;
   will-change: transform;
-  filter: drop-shadow(0 12px 15px #1436593b);
+  filter: saturate(.65) drop-shadow(0 7px 14px #14365932);
 }
 .train-left {
-  top: 30%; right: 48%;
-  transform: translate3d(calc(var(--train-remaining, 1) * -70%), calc(var(--train-remaining, 1) * 32%), 0) rotate(-8deg);
+  top: 30%; left: max(2%, calc(50% - 510px));
+  transform: translate3d(calc(-1 * var(--train-travel) * var(--train-remaining, 1)), 0, 0) rotate(-8deg);
 }
 .train-right {
-  top: 46%; left: 48%;
-  transform: translate3d(calc(var(--train-remaining, 1) * 70%), calc(var(--train-remaining, 1) * -32%), 0) rotate(-8deg) scaleX(-1);
+  top: 46%; right: max(2%, calc(50% - 510px));
+  transform: translate3d(calc(var(--train-travel) * var(--train-remaining, 1)), 0, 0) rotate(-8deg) scaleX(-1);
 }
 
 .overview { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(85px, 12vw, 160px) 0 100px; background: #eaf3ff; text-align: center; }
@@ -191,14 +193,10 @@ summary { cursor: pointer; }
 .slot-route, .slot-earlier { --tile-radius: 999px; }
 .slot-status { --tile-radius: 5% 5% 0 0 / 30% 30% 0 0; }
 .slot-service, .slot-station { --tile-radius: 0; }
-.flight-slot::before, .flight-card { position: absolute; inset: 0; border-radius: var(--tile-radius); }
-.flight-slot::before {
-  content: "";
-  background: #a2bddc88;
-  backdrop-filter: grayscale(1) contrast(.85);
-}
-.flight-slot.landed::before { visibility: hidden; }
 .flight-card {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--tile-radius);
   display: block;
   width: 100%;
   height: 100%;
@@ -321,9 +319,9 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
   .scribble-arrow { left: calc(50% + 103px); bottom: -50px; width: 51px; }
   .showcase { margin-top: 120px; padding: 15px 0 75px; }
   .showcase-main { width: min(230px, 59vw); }
-  .showcase-train { width: min(330px, 71vw); }
-  .train-left { right: 46%; top: 32%; }
-  .train-right { left: 45%; top: 50%; }
+  .showcase-train { width: min(330px, 46vw); }
+  .train-left { left: 1%; top: 32%; }
+  .train-right { right: 1%; top: 50%; }
   .showcase-rail { inset-inline: -28%; height: 49px; }
   .section-heading { font-size: clamp(36px, 9.1vw, 55px); }
   .overview { min-height: 456px; padding: 65px 0; }
