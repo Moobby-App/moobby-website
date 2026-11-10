@@ -55,18 +55,41 @@
 
     <section class="overview" aria-labelledby="overview-heading">
       <h2 class="section-heading" id="overview-heading">cepat tahu kabarnya,<br><strong>lebih siap berangkat</strong></h2>
-      <div class="ticker" data-ticker aria-label="Cakupan dan fitur Moobby">
+      <div class="ticker overview-ticker" id="overview-ticker" data-ticker aria-label="Yang bisa kamu cek sebelum berangkat">
         <div class="ticker-track">
           <div class="ticker-group">
-            <div class="stat"><span aria-hidden="true">🚉</span><b>cepat</b><small>lihat kabar gangguan</small></div>
-            <div class="stat"><span aria-hidden="true">🗺️</span><b>terkurasi</b><small>sesuai rute perjalanan</small></div>
-            <div class="stat"><span aria-hidden="true">↔</span><b>dampak</b><small>di jalur dan stasiun</small></div>
-            <div class="stat"><span aria-hidden="true">🔖</span><b>rute</b><small>tersimpan</small></div>
-            <div class="stat"><span aria-hidden="true">⇄</span><b>moda</b><small>alternatif</small></div>
+            <article class="overview-card">
+              <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1Zm13 4h2v10a2 2 0 0 1-2 2M8 8h6m-6 4h6m-6 4h3"/></svg></span>
+              <h3>Kabar gangguan</h3>
+              <p>Lihat laporan KRL sebelum menuju stasiun.</p>
+            </article>
+            <article class="overview-card">
+              <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14l-5 6v6l-4 2v-8L5 5Z"/><path d="M8 8h8"/></svg></span>
+              <h3>Sesuai rutemu</h3>
+              <p>Fokus pada kabar dari jalur dan stasiun yang kamu lewati.</p>
+            </article>
+            <article class="overview-card">
+              <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3v18m0-13h6m-6 8h6m5-6v4m0 3h.01"/><circle cx="6" cy="8" r="2" fill="white"/><circle cx="6" cy="16" r="2" fill="white"/><path d="M13 8h7v12h-7z"/></svg></span>
+              <h3>Dampak perjalanan</h3>
+              <p>Lihat lokasi gangguan dan perubahan perkiraan waktu tiba.</p>
+            </article>
+            <article class="overview-card">
+              <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1Zm2 5h6m-6 3h4"/></svg></span>
+              <h3>Rute tersimpan</h3>
+              <p>Buka lagi rute pergi dan pulang untuk cek kabarnya.</p>
+            </article>
+            <article class="overview-card">
+              <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h4a3 3 0 0 0 3-3V9a3 3 0 0 1 3-3h6m-3-3 3 3-3 3M11 13a3 3 0 0 0 3 3h6m-3-3 3 3-3 3"/></svg></span>
+              <h3>Pilihan moda</h3>
+              <p>Pertimbangkan cara lain ke tujuan saat rute terganggu.</p>
+            </article>
           </div>
         </div>
       </div>
-      <a href="#timeline" class="pill">Lihat kabar di timeline</a>
+      <div class="overview-actions">
+        <a href="#timeline" class="pill">Lihat kabar di timeline</a>
+        <button class="ticker-toggle" type="button" aria-controls="overview-ticker">Jeda gerakan kartu</button>
+      </div>
     </section>
 
     <section class="timeline" id="timeline" aria-labelledby="timeline-heading">

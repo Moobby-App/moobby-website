@@ -151,6 +151,12 @@ function makeScenarioRow(row) {
 
 document.querySelector("[data-scenario-rows]").append(...scenarioRows.map(makeScenarioRow));
 const tickers = [...document.querySelectorAll("[data-ticker]")];
+const overviewTicker = document.querySelector("#overview-ticker");
+const tickerToggle = document.querySelector(".ticker-toggle");
+tickerToggle.addEventListener("click", () => {
+  const paused = overviewTicker.toggleAttribute("data-paused");
+  tickerToggle.textContent = paused ? "Lanjutkan gerakan kartu" : "Jeda gerakan kartu";
+});
 function fitTickers() {
   for (const ticker of tickers) {
     const track = ticker.firstElementChild;
@@ -170,6 +176,9 @@ function fitTickers() {
     copy.dataset.copy = "";
     copy.setAttribute("aria-hidden", "true");
     track.append(copy);
+    if (ticker === overviewTicker) {
+      ticker.style.setProperty("--overview-duration", `${group.scrollWidth / 26}s`);
+    }
   }
 }
 
