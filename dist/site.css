@@ -157,9 +157,9 @@ summary { cursor: pointer; }
 }
 .overview-link strong { font-weight: 680; }
 .overview-orb {
-  --orb-a: #ffdcab;
-  --orb-b: #f4bcb8;
-  --orb-c: #f9e3b9;
+  --orb-a: #b4dfff;
+  --orb-b: #8ab7e4;
+  --orb-c: #d8ecff;
   position: relative;
   display: grid;
   place-items: center;
@@ -171,8 +171,8 @@ summary { cursor: pointer; }
   background:
     radial-gradient(ellipse at 20% 17%, var(--orb-a), transparent 65%),
     radial-gradient(ellipse at 88% 35%, var(--orb-b), transparent 58%),
-    radial-gradient(ellipse at 48% 88%, var(--orb-c), #fffaf4 92%);
-  box-shadow: inset 0 0 11px 6px #fffdf8c9;
+    radial-gradient(ellipse at 48% 88%, var(--orb-c), #f1f8ff 92%);
+  box-shadow: inset 0 0 11px 6px #f5faffcc;
   transition: transform .28s ease, box-shadow .28s ease;
 }
 .overview-orb::after {
@@ -185,13 +185,13 @@ summary { cursor: pointer; }
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23grain)' d='M0 0h120v120H0z'/%3E%3C/svg%3E");
 }
 .overview-orb svg { width: 51%; height: 51%; fill: currentColor; }
-.overview-orb .orb-cut { fill: none; stroke: #fff8ed; stroke-width: 3.8; stroke-linecap: round; }
+.overview-orb .orb-cut { fill: none; stroke: #f1f8ff; stroke-width: 3.8; stroke-linecap: round; }
 .overview-orb .orb-line { fill: none; stroke: currentColor; stroke-width: 5.8; stroke-linecap: round; stroke-linejoin: round; }
-.overview-link:nth-child(2) .overview-orb { --orb-a: #b8d1ec; --orb-b: #f2d3a4; --orb-c: #cbe3ce; }
-.overview-link:nth-child(3) .overview-orb { --orb-a: #edb9c5; --orb-b: #fff4e8; --orb-c: #eec4cb; }
-.overview-link:nth-child(4) .overview-orb { --orb-a: #c6c7e7; --orb-b: #c6e5f2; --orb-c: #b7d4e9; }
-.overview-link:nth-child(5) .overview-orb { --orb-a: #d3e6c0; --orb-b: #f4e1a6; --orb-c: #c7dfc5; }
-.overview-link:is(:hover, :focus-visible) .overview-orb { transform: translateY(-4px); box-shadow: inset 0 0 11px 6px #fffdf8c9, 0 8px 22px #21476845; }
+.overview-link:nth-child(2) .overview-orb { --orb-a: #a9c5ed; --orb-b: #c3e4ff; --orb-c: #d3e4f7; }
+.overview-link:nth-child(3) .overview-orb { --orb-a: #c6dcf9; --orb-b: #e6f3ff; --orb-c: #a5bee6; }
+.overview-link:nth-child(4) .overview-orb { --orb-a: #adc9ed; --orb-b: #bbdceb; --orb-c: #dfeeff; }
+.overview-link:nth-child(5) .overview-orb { --orb-a: #beddf3; --orb-b: #a6c5f0; --orb-c: #d3e8fa; }
+.overview-link:is(:hover, :focus-visible) .overview-orb { transform: translateY(-4px); box-shadow: inset 0 0 11px 6px #f5faffcc, 0 8px 22px #21476845; }
 .overview-link:active .overview-orb { transform: scale(.97); }
 .overview-link:focus-visible { outline-color: #fff; border-radius: 12px; }
 .ticker { width: 100%; overflow: hidden; margin: 55px 0 46px; mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent); }
