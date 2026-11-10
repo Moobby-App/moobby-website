@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 176" fill="none">
+  <defs>
+    <linearGradient id="body" x1="0" y1="22" x2="0" y2="144" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5FAFE"/><stop offset=".55" stop-color="#C6D5E3"/><stop offset=".75" stop-color="#F8FBFF"/><stop offset="1" stop-color="#91A9BF"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="38" x2="0" y2="101" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#213F5D"/><stop offset="1" stop-color="#5392B9"/>
+    </linearGradient>
+    <g id="windows">
+      <rect width="47" height="32" rx="5" fill="url(#glass)"/><path d="m10 3-7 13M20 3 9 25" stroke="#DBF5FF" stroke-opacity=".25" stroke-width="2"/>
+    </g>
+    <g id="door">
+      <rect width="63" height="91" rx="6" fill="#B4C6D7" stroke="#67849E" stroke-width="2"/>
+      <path d="M31.5 1v89" stroke="#7891A7" stroke-width="2"/>
+      <rect x="6" y="8" width="19" height="36" rx="3" fill="url(#glass)"/><rect x="38" y="8" width="19" height="36" rx="3" fill="url(#glass)"/>
+    </g>
+  </defs>
+  <path d="M22 148h499" stroke="#213955" stroke-width="11" stroke-linecap="round"/>
+  <path d="M58 147h77m272 0h78" stroke="#253A50" stroke-width="16" stroke-linecap="round"/>
+  <g fill="#273D54" stroke="#A4B6C8" stroke-width="4">
+    <circle cx="68" cy="153" r="12"/><circle cx="122" cy="153" r="12"/><circle cx="418" cy="153" r="12"/><circle cx="472" cy="153" r="12"/>
+  </g>
+  <path d="M30 24h469c27 0 39 7 49 24l24 44c7 12 7 28 2 37-4 8-13 12-26 12H30C12 141 5 133 5 119V50c0-16 8-26 25-26Z" fill="url(#body)" stroke="#7792AD" stroke-width="2"/>
+  <path d="M38 24c7-9 17-12 32-12h408c17 0 27 4 34 12H38Z" fill="#7A97B4"/>
+  <path d="M7 91h557l8 13H7Z" fill="#2879C0"/><path d="M7 106h568v10H7Z" fill="#0D528E"/>
+  <use href="#windows" x="29" y="47"/><use href="#windows" x="157" y="47"/><use href="#windows" x="213" y="47"/>
+  <use href="#windows" x="340" y="47"/><use href="#windows" x="396" y="47"/>
+  <use href="#door" x="84" y="39"/><use href="#door" x="267" y="39"/><use href="#door" x="451" y="39"/>
+  <path d="M522 42c10 2 16 7 21 16l15 28h-36c-4 0-6-2-6-6V47c0-4 2-6 6-5Z" fill="#18334D"/>
+  <path d="M528 47c5 2 8 5 11 11l8 15" stroke="#A3D7F5" stroke-opacity=".58" stroke-width="3" stroke-linecap="round"/>
+  <path d="M549 115h18" stroke="#FFF4BC" stroke-width="5" stroke-linecap="round"/>
+  <path d="M14 134h548" stroke="#E9F4FC" stroke-opacity=".6" stroke-width="2"/>
+</svg>

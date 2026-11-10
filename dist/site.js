@@ -175,24 +175,26 @@ function fitTickers() {
 
 const timeline = document.querySelector(".timeline-stage");
 const stickyPhone = document.querySelector(".timeline-sticky");
-const cards = [...document.querySelectorAll(".flight-card")].map(card => ({
-  element: card,
-  x: Number.parseFloat(card.style.getPropertyValue("--from-x")),
-  y: Number.parseFloat(card.style.getPropertyValue("--from-y")),
+const cards = [...document.querySelectorAll(".flight-slot")].map(slot => ({
+  slot,
+  element: slot.querySelector(".flight-card"),
+  direction: Number(slot.style.getPropertyValue("--direction")),
+  drift: Number(slot.style.getPropertyValue("--drift")),
 }));
+const showcase = document.querySelector(".showcase");
 const steps = [...document.querySelectorAll(".story-steps > div")];
-const slides = [...document.querySelectorAll(".story-phone img")];
+const slides = [...document.querySelectorAll(".story-slide")];
 const dots = [...document.querySelectorAll(".scene-dots a")];
 const title = document.querySelector("#scene-title");
 const description = document.querySelector("#scene-description");
 const kicker = document.querySelector("#scene-kicker");
 const scenes = [
-  ["lihat perjalananmu dalam satu timeline.", "Ikuti urutan stasiun dan bagian rute yang akan kamu lewati."],
-  ["simpan rute yang sering kamu pakai.", "Buka rute Pergi ke Kantor dari pemilih perjalanan di halaman utama."],
+  ["lihat perjalananmu dalam satu timeline.", "Cek status perjalanan dan ikuti urutan stasiun dari Cisauk menuju Kebayoran."],
   ["cari rute sebelum berangkat.", "Tentukan titik awal dan tujuan perjalananmu, lalu pilih stasiun yang akan digunakan."],
-  ["lihat ketika kondisi rute berubah.", "Di simulasi ini, laporan gangguan muncul pada rute menuju Kebayoran."],
-  ["pahami dampaknya pada perjalananmu.", "Buka detail untuk melihat stasiun terdampak dan informasi yang tersedia."],
-  ["pertimbangkan pilihan perjalanan.", "Bandingkan tetap naik KRL dengan kemungkinan menggunakan moda lain."],
+  ["lihat dampak keterlambatan.", "Status kuning menyorot antrean masuk Sudimara dan perubahan perkiraan waktu tiba."],
+  ["ketahui saat perjalanan terhenti.", "Status merah menandai gangguan persinyalan di Sudimara dan mengarahkanmu ke rute alternatif."],
+  ["cek gangguan sebelum stasiun asal.", "Moobby juga menandai gangguan di Parung Panjang sebelum titik keberangkatan di Cisauk."],
+  ["buka detail langsung di timeline.", "Perluas kartu Parung Panjang untuk membaca lokasi dan dampak gangguan."],
 ];
 let sceneIndex = -1;
 const wordStory = document.querySelector(".word-story");
@@ -238,23 +240,48 @@ function setScene(index) {
   }
 }
 
+const clampUnit = value => Math.max(0, Math.min(1, value));
+const ease = value => value * value * (3 - 2 * value);
+let trainProgress;
+let flightProgress;
+
+function follow(current, target) {
+  if (current === undefined || Math.abs(target - current) < .001) return target;
+  scheduleScroll();
+  return current + (target - current) * .24;
+}
+
 function updateScroll() {
   nav.classList.toggle("scrolled", scrollY > innerHeight * .7);
+  if (!reduceMotion.matches) {
+    const stageTop = showcase.getBoundingClientRect().top;
+    const entry = innerHeight * .94;
+    const target = clampUnit((entry - stageTop) / (innerHeight * .76));
+    trainProgress = follow(trainProgress, target);
+    showcase.style.setProperty("--train-remaining", 1 - ease(trainProgress));
+  }
+
   if (mobile.matches) {
     if (sceneIndex === -1) setScene(0);
     return;
   }
+
   if (!reduceMotion.matches) {
-    const entry = innerHeight * .72;
+    const entry = innerHeight * .83;
     const stickyOffset = Number.parseFloat(getComputedStyle(stickyPhone).top);
     const distance = Math.max(1, entry + timeline.offsetHeight - stickyPhone.offsetHeight - stickyOffset);
-    const progress = (entry - timeline.getBoundingClientRect().top) / distance;
-    cards.forEach(({ element, x, y }, index) => {
-      const raw = Math.max(0, Math.min(1, (progress - index * .035) / .85));
-      const position = raw * raw * (3 - 2 * raw);
-      const remainder = 1 - position;
-      element.style.transform = `translate(${x * remainder}%, ${y * remainder}%) scale(${1 - position * .2})`;
-      element.style.opacity = String(Math.min(1, remainder * 5));
+    const target = clampUnit((entry - timeline.getBoundingClientRect().top) / distance);
+    flightProgress = follow(flightProgress, target);
+    const spread = Math.min(345, innerWidth * .22);
+    cards.forEach(({ slot, element, direction, drift }, index) => {
+      const position = ease(clampUnit((flightProgress - index * .044) / .64));
+      const remaining = 1 - position;
+      const arc = Math.sin(Math.PI * position) * 24;
+      slot.classList.toggle("landed", position === 1);
+      element.style.setProperty("--flight-x", `${direction * spread * remaining}px`);
+      element.style.setProperty("--flight-y", `${drift * remaining - arc}px`);
+      element.style.setProperty("--flight-scale", 1 + remaining * .19);
+      element.style.setProperty("--flight-shadow", remaining * .32);
     });
     const scroll = Math.min(1, Math.max(0, -wordStory.getBoundingClientRect().top / (wordStory.offsetHeight - innerHeight)));
     wordLines.forEach((line, index) => {
@@ -306,16 +333,19 @@ demo.addEventListener("click", event => {
 
 const scenarioButtons = [...document.querySelectorAll("[data-scenario]")];
 const result = document.querySelector(".demo-result");
+const conditionsScreen = document.querySelector("#conditions-screen");
 const scenarios = [
-  ["ok", "Perjalanan lancar", "Ikuti timeline Green Line dari Cisauk ke Kebayoran.", "Lanjutkan dengan KRL pada rute yang tersimpan."],
-  ["delay", "Ada keterlambatan di rute", "Dalam simulasi ini, perjalanan memerlukan waktu tambahan sekitar 12 menit.", "Tetap di rute KRL jika waktumu fleksibel, atau pertimbangkan moda lain."],
-  ["disrupt", "Ada gangguan dalam perjalanan", "Dalam simulasi ini, perjalanan berhenti sementara di Sudimara.", "Cek pilihan melanjutkan dengan KRL atau mempertimbangkan moda lain."],
+  ["ok", "screen-clear", "Tidak ada laporan gangguan", "Kereta berjalan sesuai jadwal pada cuplikan perjalanan ini.", "Lanjutkan dengan KRL pada rute yang tersimpan."],
+  ["delay", "screen-delay", "Kereta tertunda ±12 menit", "Antrean masuk Sudimara menambah waktu perjalanan.", "Tetap di rute KRL jika waktumu fleksibel, atau cek pilihan moda lain."],
+  ["disrupt", "screen-stop", "Perjalanan terhenti di Sudimara", "Gangguan persinyalan menghentikan perjalanan sementara.", "Buka rekomendasi perjalanan untuk melihat rute alternatif."],
 ];
 scenarioButtons.forEach(button => {
   button.addEventListener("click", () => {
-    const [tone, heading, copy, option] = scenarios[Number(button.dataset.scenario)];
+    const [tone, screen, heading, copy, option] = scenarios[Number(button.dataset.scenario)];
     scenarioButtons.forEach(candidate => candidate.setAttribute("aria-pressed", String(candidate === button)));
     result.dataset.tone = tone;
+    conditionsScreen.className = `app-screen ${screen}`;
+    conditionsScreen.setAttribute("aria-label", `Tampilan Moobby: ${heading}`);
     document.querySelector("#demo-title").textContent = heading;
     document.querySelector("#demo-copy").textContent = copy;
     document.querySelector("#demo-option").textContent = option;
