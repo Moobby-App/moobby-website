@@ -255,7 +255,8 @@ function updateScroll() {
   if (!reduceMotion.matches) {
     const stageTop = showcase.getBoundingClientRect().top;
     const entry = innerHeight * .94;
-    const target = clampUnit((entry - stageTop) / (innerHeight * .84));
+    const travelDistance = innerHeight + showcase.offsetHeight * .28;
+    const target = clampUnit((entry - stageTop) / travelDistance);
     trainProgress = follow(trainProgress, target, .14);
     showcase.style.setProperty("--train-remaining", 1 - ease(trainProgress));
   }

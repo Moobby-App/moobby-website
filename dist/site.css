@@ -89,6 +89,7 @@ summary { cursor: pointer; }
 .intro.is-seen .scribble-arrow { animation: draw 1.8s .2s ease forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .showcase {
+  --train-width: clamp(600px, 116vw, 2000px);
   position: relative;
   width: min(1050px, 100%);
   margin: clamp(130px, 18vw, 238px) auto 0;
@@ -98,38 +99,32 @@ summary { cursor: pointer; }
   isolation: isolate;
 }
 .showcase-main { width: min(310px, 66vw); z-index: 2; }
-.showcase-rail, .showcase-rail::after {
+.showcase-rail {
   position: absolute;
-  inset: 39% -10% auto;
-  height: 58px;
-  transform: rotate(-8deg);
+  top: calc(45% + var(--train-width) * .123);
+  left: 50%;
+  width: 100vw;
+  height: 24px;
+  transform: translateX(-50%);
   opacity: .22;
-  background: linear-gradient(transparent 13px, #bbdcff 13px 16px, transparent 16px 40px, #bbdcff 40px 43px, transparent 43px),
+  background: linear-gradient(transparent 2px, #bbdcff 2px 4px, transparent 4px 18px, #bbdcff 18px 20px, transparent 20px),
     repeating-linear-gradient(90deg, transparent 0 18px, #c1ddf754 18px 23px, transparent 23px 38px);
-}
-.showcase-rail::after {
-  content: "";
-  inset: 0;
-  transform: translateY(clamp(65px, 10vw, 132px));
 }
 .showcase-train {
   position: absolute;
-  width: min(480px, 44vw);
-  --train-travel: calc(50vw + 55%);
-  opacity: calc(.42 - .28 * var(--train-remaining, 1));
+  top: 45%;
+  left: 50%;
+  width: var(--train-width);
+  max-width: none;
   height: auto;
+  opacity: .36;
   z-index: 1;
   pointer-events: none;
   will-change: transform;
   filter: saturate(.65) drop-shadow(0 7px 14px #14365932);
-}
-.train-left {
-  top: 30%; left: max(2%, calc(50% - 510px));
-  transform: translate3d(calc(-1 * var(--train-travel) * var(--train-remaining, 1)), 0, 0) rotate(-8deg);
-}
-.train-right {
-  top: 46%; right: max(2%, calc(50% - 510px));
-  transform: translate3d(calc(var(--train-travel) * var(--train-remaining, 1)), 0, 0) rotate(-8deg) scaleX(-1);
+  transform: translate(-50%, -50%)
+    translateX(calc((50vw + 50% + 8px) * (2 * var(--train-remaining, 1) - 1)))
+    scaleX(-1);
 }
 
 .overview { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(85px, 12vw, 160px) 0 100px; background: #eaf3ff; text-align: center; }
@@ -319,10 +314,6 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
   .scribble-arrow { left: calc(50% + 103px); bottom: -50px; width: 51px; }
   .showcase { margin-top: 120px; padding: 15px 0 75px; }
   .showcase-main { width: min(230px, 59vw); }
-  .showcase-train { width: min(330px, 46vw); }
-  .train-left { left: 1%; top: 32%; }
-  .train-right { right: 1%; top: 50%; }
-  .showcase-rail { inset-inline: -28%; height: 49px; }
   .section-heading { font-size: clamp(36px, 9.1vw, 55px); }
   .overview { min-height: 456px; padding: 65px 0; }
   .ticker { margin: 32px 0; }
@@ -369,6 +360,6 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
   .about { min-height: 0; }
   .about-cards { position: static; }
   .flight-deck { display: none; }
-  .showcase { --train-remaining: 0 !important; }
+  .showcase { --train-remaining: .5 !important; }
   .timeline-stage { height: auto; padding-bottom: 60px; }
 }
