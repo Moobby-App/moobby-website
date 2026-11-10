@@ -138,10 +138,14 @@ function makeScenarioRow(row) {
     const card = document.createElement("article");
     card.className = "scenario-card";
     const heading = document.createElement("b");
-    heading.textContent = `${symbol}  ${title}`;
-    const body = document.createElement("span");
+    const mark = document.createElement("span");
+    mark.className = "scenario-mark";
+    mark.setAttribute("aria-hidden", "true");
+    mark.textContent = symbol;
+    heading.textContent = title;
+    const body = document.createElement("p");
     body.textContent = copy;
-    card.append(heading, body);
+    card.append(mark, heading, body);
     group.append(card);
   }
   track.append(group);
@@ -199,8 +203,15 @@ const scenes = [
 let sceneIndex = -1;
 const wordStory = document.querySelector(".word-story");
 const wordLines = [...wordStory.querySelectorAll("p")];
-const about = document.querySelector(".about");
-const aboutCards = [...about.querySelectorAll("article")];
+const teamMembers = [...document.querySelectorAll(".team-member")];
+teamMembers.forEach(member => {
+  member.addEventListener("click", () => {
+    const wasSelected = member.getAttribute("aria-pressed") === "true";
+    teamMembers.forEach(other => {
+      other.setAttribute("aria-pressed", String(other === member && !wasSelected));
+    });
+  });
+});
 
 function showMobileScene() {
   const index = steps.findIndex(step => `#${step.id}` === location.hash);
@@ -288,11 +299,7 @@ function updateScroll() {
       const direction = index % 2 === 0 ? 1 : -1;
       line.style.transform = `translateX(${direction * (scroll - .5) * 48}vw)`;
     });
-    const aboutProgress = Math.min(1, Math.max(0, -about.getBoundingClientRect().top / (about.offsetHeight - innerHeight)));
-    aboutCards.forEach((card, i) => {
-      const distanceFromFocus = Math.abs(i - aboutProgress * (aboutCards.length - 1));
-      card.style.transform = `translateY(${distanceFromFocus * 24}px) scale(${1.08 - distanceFromFocus * .085})`;
-    });
+
   }
   let active = 0;
   for (const [i, step] of steps.entries()) {
