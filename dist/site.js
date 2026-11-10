@@ -93,7 +93,7 @@ selectVideo();
 
 const intro = document.querySelector(".intro");
 const rotator = document.querySelector(".rotator");
-const words = ["perjalanan", "rute harian", "jalan pulang", "naik KRL"];
+const words = ["berangkat", "naik KRL", "ubah rencana", "pulang"];
 let wordIndex = 0;
 let introVisible = false;
 new IntersectionObserver(([entry]) => {
@@ -113,16 +113,16 @@ setInterval(() => {
 
 const scenarioRows = [
   [
-    ["✓", "Perjalanan lancar", "Buka rute tersimpan dan lihat urutan stasiun sebelum berangkat."],
-    ["◷", "Kereta terlambat", "Lihat bagian rute yang terdampak keterlambatan."],
-    ["⚠", "Gangguan persinyalan", "Buka laporan untuk melihat dampaknya pada perjalanan."],
-    ["⇄", "Moda alternatif", "Pertimbangkan pilihan lain menuju tujuan."],
+    ["✓", "Perjalanan lancar", "Cek status di rute tersimpan sebelum berangkat ke stasiun."],
+    ["◷", "Kereta terlambat", "Lihat titik keterlambatan dan pengaruhnya pada waktu tiba."],
+    ["⚠", "Gangguan persinyalan", "Baca lokasi dan dampak gangguan untuk menentukan langkah berikutnya."],
+    ["⇄", "Moda alternatif", "Pertimbangkan moda lain kalau perjalanan perlu disesuaikan."],
   ],
   [
-    ["↔", "Rute pergi dan pulang", "Simpan perjalanan yang kamu gunakan sehari-hari."],
+    ["↔", "Rute pergi dan pulang", "Simpan perjalanan harian agar kabar di rute itu mudah dicek."],
     ["⌕", "Cari rute baru", "Pilih lokasi dan stasiun tujuan yang berbeda."],
     ["⌖", "Stasiun sekitar", "Temukan stasiun yang dekat dengan posisi kamu."],
-    ["◎", "Timeline perjalanan", "Lihat titik awal, stasiun yang dilewati, dan tujuan."],
+    ["◎", "Timeline perjalanan", "Lihat di mana laporan gangguan muncul dalam urutan stasiunmu."],
   ],
 ];
 
@@ -188,12 +188,12 @@ const title = document.querySelector("#scene-title");
 const description = document.querySelector("#scene-description");
 const kicker = document.querySelector("#scene-kicker");
 const scenes = [
-  ["lihat perjalananmu dalam satu timeline.", "Cek status perjalanan dan ikuti urutan stasiun dari Cisauk menuju Kebayoran."],
-  ["cari rute sebelum berangkat.", "Tentukan titik awal dan tujuan perjalananmu, lalu pilih stasiun yang akan digunakan."],
-  ["lihat dampak keterlambatan.", "Status kuning menyorot antrean masuk Sudimara dan perubahan perkiraan waktu tiba."],
-  ["ketahui saat perjalanan terhenti.", "Status merah menandai gangguan persinyalan di Sudimara dan mengarahkanmu ke rute alternatif."],
-  ["cek gangguan sebelum stasiun asal.", "Moobby juga menandai gangguan di Parung Panjang sebelum titik keberangkatan di Cisauk."],
-  ["buka detail langsung di timeline.", "Perluas kartu Parung Panjang untuk membaca lokasi dan dampak gangguan."],
+  ["cek kondisi rute sebelum berangkat.", "Buka rute harianmu dan lihat statusnya sekilas. Kalau ada gangguan, lihat letaknya langsung di timeline."],
+  ["tentukan rute yang mau kamu cek.", "Pilih titik awal dan tujuan untuk melihat kabar yang berkaitan dengan perjalanan itu."],
+  ["lihat dampak keterlambatan.", "Laporan antrean di Sudimara ditampilkan bersama perkiraan waktu tiba, supaya kamu bisa mempertimbangkan jam berangkat."],
+  ["ketahui saat perjalanan terhenti.", "Jika layanan terhenti di Sudimara, lihat titik gangguannya dan pertimbangkan pilihan perjalanan lain."],
+  ["cek gangguan sebelum stasiun asal.", "Gangguan sebelum stasiun asal juga bisa berpengaruh. Cek laporan Parung Panjang sebelum berangkat dari Cisauk."],
+  ["buka detail langsung di timeline.", "Buka laporan di titik yang terdampak untuk melihat kejadian, lokasi, dan dampaknya pada perjalananmu."],
 ];
 let sceneIndex = -1;
 const wordStory = document.querySelector(".word-story");
