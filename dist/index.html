@@ -3,104 +3,194 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#194c9e">
-  <meta name="description" content="Kenali Moobby, pendamping perjalanan KRL harian. Simpan rute, lihat urutan stasiun, dan jelajahi pilihan saat perjalanan berubah.">
+  <meta name="theme-color" content="#9bcaff">
+  <meta name="description" content="Kenali Moobby, teman perjalanan KRL harian. Simpan rute, ikuti timeline stasiun, dan lihat pilihan saat perjalanan berubah.">
   <title>Moobby — Teman perjalanan KRL</title>
-  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="preload" href="assets/peron-poster.jpg" as="image">
   <link rel="stylesheet" href="site.css">
   <script src="site.js" defer></script>
 </head>
 <body id="top">
   <a class="skip" href="#kenalan">Lewati ke konten</a>
   <header class="nav" data-nav>
-    <a href="#top" class="brand"><img src="mark.svg" alt="" width="42" height="42">Moobby</a>
-    <button class="nav-toggle icon-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Buka menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a href="#top" class="brand"><img src="assets/app-icon.png" width="44" height="44" alt="">Moobby</a>
+    <button class="nav-toggle round" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Buka menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     <nav id="nav-links" aria-label="Navigasi utama">
-      <a href="#fitur">fitur</a><a href="#cara-kerja">cara kerja</a><a href="#faq">FAQ</a><a class="pill nav-cta" href="#demo">Coba demo Moobby</a>
+      <details class="nav-features"><summary>fitur <span aria-hidden="true">⌄</span></summary><div><a href="#timeline">timeline stasiun</a><a href="#simpan">cari rute</a><a href="#gangguan">detail gangguan</a><a href="#alternatif">moda alternatif</a></div></details>
+      <a href="#skenario">skenario</a><a href="#tentang">tentang</a><a href="#faq">FAQ</a>
+      <a class="pill nav-cta" href="#demo" aria-haspopup="dialog">Coba demo Moobby!</a>
     </nav>
   </header>
+
   <main>
-    <section class="hero" aria-label="Ilustrasi perjalanan KRL pagi">
-      <img class="hero-photo" src="krl-pagi.jpg" alt="" fetchpriority="high" width="1672" height="941">
+    <section class="hero" aria-label="Video suasana peron KRL">
+      <video id="hero-video" playsinline muted loop preload="none" poster="assets/peron-poster.jpg" aria-label="Cuplikan di peron KRL pada malam hari"></video>
       <div class="hero-shade"></div>
-      <a class="hero-down icon-button" href="#kenalan" aria-label="Kenalan dengan Moobby"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-7-7 7 7 7-7"/></svg></a>
-      <button class="motion-toggle icon-button" type="button" aria-pressed="false" aria-label="Jeda animasi"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="pause-icon" d="M9 5v14m6-14v14"/><path class="play-icon" d="m9 5 11 7-11 7z"/></svg></button>
+      <a class="hero-down round" href="#kenalan" aria-label="Gulir untuk mengenal Moobby"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-7-7 7 7 7-7"/></svg></a>
+      <div class="hero-controls">
+        <button class="round" id="play-toggle" type="button" aria-label="Putar video" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="pause-icon" d="M9 5v14m6-14v14"/><path class="play-icon" d="m9 5 11 7-11 7z"/></svg></button>
+        <button class="round" id="sound-toggle" type="button" aria-label="Aktifkan suara" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="sound-off" d="m16 10 5 5m0-5-5 5"/><path class="sound-on" d="M16 8c2 2 2 6 0 8m3-11c4 4 4 10 0 14"/></svg></button>
+      </div>
     </section>
 
     <section class="intro" id="kenalan">
       <div class="intro-copy">
-        <p class="scribble" aria-hidden="true">bareng Moobby!</p>
-        <h1>teman untuk setiap <span class="rotator" aria-hidden="true"><b>perjalanan</b><b>pagi berangkat</b><b>jalan pulang</b></span><span class="sr">perjalanan</span></h1>
-        <p class="lede">Rute KRL, urutan stasiun, dan pilihan saat perjalanan berubah. Semua dalam satu timeline.</p>
-        <a class="pill light" href="#demo">Coba demo Moobby</a>
+        <span class="scribble" aria-hidden="true">bareng Moobby!</span>
+        <h1><span>teman untuk setiap</span><span class="rotator" aria-hidden="true">perjalanan</span><span class="sr"> perjalanan</span></h1>
+        <p>Rute KRL, urutan stasiun, dan alternatif dalam satu timeline.</p>
+        <a class="pill" href="#demo" aria-haspopup="dialog">Coba demo Moobby!</a>
         <svg class="scribble-arrow" viewBox="0 0 118 92" aria-hidden="true"><path d="M3 6C39 6 88 29 82 80M60 61l23 21 25-20"/></svg>
       </div>
-      <div class="tablet" aria-label="Ilustrasi layar Moobby">
-        <div class="tablet-side"><span><img src="mark.svg" alt="" width="28" height="28"> Moobby</span><small>PERJALANAN</small><b>⌂ &nbsp; Beranda</b><span>⌕ &nbsp; Cari rute</span><span>☆ &nbsp; Rute tersimpan</span></div>
-        <div class="tablet-content"><span class="eyebrow">CONTOH PERJALANAN</span><h2>Selamat pagi!</h2><p>Siap memulai perjalanan?</p><div class="app-card"><strong>Serpong → Tanah Abang</strong><small>KRL Commuter · Green Line</small><div class="mini-track"><span>Serpong</span><span>Jurangmangu</span><span>Kebayoran</span><span>Tanah Abang</span></div></div></div>
+      <div class="showcase" aria-label="Tampilan aplikasi Moobby">
+        <div class="showcase-screen">
+          <div class="showcase-brand"><img src="assets/app-icon.png" width="54" height="54" alt=""><span>Moobby</span><small>PERJALANAN HARIAN</small><strong>Cisauk → Kebayoran</strong><small>Green Line</small></div>
+          <img class="showcase-main" src="assets/home.png" alt="Beranda Moobby dengan rute Cisauk ke Kebayoran dan timeline KRL" width="1206" height="2622">
+          <img class="showcase-side" src="assets/delayed.png" alt="" width="1206" height="2622">
+        </div>
       </div>
     </section>
 
-    <section class="overview" id="fitur">
-      <h2>yang kamu perlukan<br>di satu perjalanan</h2>
-      <div class="ticker-window"><div class="ticker">
-        <div class="ticker-group"><span>↔ &nbsp; Rute pergi &amp; pulang</span><span>◎ &nbsp; Timeline stasiun</span><span>◇ &nbsp; Detail gangguan</span><span>⌖ &nbsp; Stasiun sekitar</span><span>⇄ &nbsp; Pilihan alternatif</span></div>
-        <div class="ticker-group" aria-hidden="true"><span>↔ &nbsp; Rute pergi &amp; pulang</span><span>◎ &nbsp; Timeline stasiun</span><span>◇ &nbsp; Detail gangguan</span><span>⌖ &nbsp; Stasiun sekitar</span><span>⇄ &nbsp; Pilihan alternatif</span></div>
-      </div></div>
-      <a class="pill dark" href="#cara-kerja">Lihat cara kerjanya ↓</a>
-    </section>
-
-    <section class="story" id="cara-kerja">
-      <h2>satu rute,<br>satu timeline</h2>
-      <div class="story-layout">
-        <div class="story-device">
-          <div class="phone">
-            <div class="phone-status"><b>9:41</b><span></span><b>▰ ▴ ▮</b></div>
-            <div class="phone-header"><small>MOOBBY · DEMO</small><strong id="story-title">Perjalanan pagi</strong><span>Serpong → Tanah Abang</span></div>
-            <div class="phone-content">
-              <div class="phone-alert" id="story-alert">Rute pergi tersimpan</div>
-              <div class="rail"><span><small>ASAL</small><b>Serpong</b></span><span><b>Rawa Buntu</b></span><span><b>Jurangmangu</b></span><span><b>Kebayoran</b></span><span><small>TUJUAN</small><b>Tanah Abang</b></span></div>
-            </div>
-            <div class="phone-footer"><span>⌂</span><span>⌕</span><span>☆</span></div>
+    <section class="overview" aria-labelledby="overview-heading">
+      <h2 class="section-heading" id="overview-heading">teman perjalanan KRL<br><strong>dalam satu aplikasi</strong></h2>
+      <div class="ticker" data-ticker aria-label="Cakupan dan fitur Moobby">
+        <div class="ticker-track">
+          <div class="ticker-group">
+            <div class="stat"><span aria-hidden="true">🚉</span><b>20</b><small>stasiun Green Line</small></div>
+            <div class="stat"><span aria-hidden="true">🗺️</span><b>1</b><small>timeline perjalanan</small></div>
+            <div class="stat"><span aria-hidden="true">↔</span><b>2</b><small>arah perjalanan</small></div>
+            <div class="stat"><span aria-hidden="true">🔖</span><b>rute</b><small>tersimpan</small></div>
+            <div class="stat"><span aria-hidden="true">⇄</span><b>moda</b><small>alternatif</small></div>
           </div>
-          <div class="float-chip chip-one" aria-hidden="true">↔ &nbsp; Rute tersimpan</div>
-          <div class="float-chip chip-two" aria-hidden="true">◎ &nbsp; Green Line</div>
         </div>
-        <div class="story-steps">
-          <article class="step" data-scene="0"><p class="eyebrow">01 · RUTE HARIAN</p><h3>Pergi dan pulang, sudah tersimpan.</h3><p>Pilih stasiun asal dan tujuan sekali. Buka lagi rute yang biasa kamu pakai ketika siap berangkat.</p></article>
-          <article class="step" data-scene="1"><p class="eyebrow">02 · TIMELINE</p><h3>Lihat stasiun dari awal sampai akhir.</h3><p>Urutan stasiun dan bagian rute yang kamu lewati tampil dalam satu timeline.</p></article>
-          <article class="step" data-scene="2"><p class="eyebrow">03 · PERUBAHAN RUTE</p><h3>Kalau perjalanan berubah, lihat pilihanmu.</h3><p>Buka detail contoh gangguan dan bandingkan opsi tetap naik KRL atau beralih moda.</p></article>
+      </div>
+      <a href="#timeline" class="pill">Lihat perjalanannya</a>
+    </section>
+
+    <section class="timeline" id="timeline" aria-labelledby="timeline-heading">
+      <h2 class="section-heading" id="timeline-heading">satu rute, satu timeline,<br><strong>dari asal sampai tujuan</strong></h2>
+      <div class="timeline-stage">
+        <div class="timeline-sticky">
+          <div class="phone timeline-phone"><img src="assets/home.png" alt="Timeline Moobby untuk rute Cisauk ke Kebayoran" width="1206" height="2622" loading="lazy"></div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:-168%;--from-y:-165%;--dest-y:24%;--hue:#d9edff">Rute Pergi ke Kantor</div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:165%;--from-y:-102%;--dest-y:33%;--hue:#dff1d7">Kondisi rute</div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:-180%;--from-y:-29%;--dest-y:44%;--hue:#ddeaff">KRL Green Line</div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:160%;--from-y:15%;--dest-y:52%;--hue:#e5f2ff">Posisi di sekitar stasiun</div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:-155%;--from-y:85%;--dest-y:76%;--hue:#e6f4df">Cisauk · stasiun asal</div>
+          <div class="flight-card" aria-hidden="true" style="--from-x:160%;--from-y:118%;--dest-y:84%;--hue:#e9f3db">Serpong</div>
         </div>
       </div>
     </section>
 
-    <section class="demo" id="demo">
-      <p class="eyebrow">DEMO INTERAKTIF</p><h2>bagaimana kalau<br>rutenya berubah?</h2>
-      <p>Coba tiga skenario untuk perjalanan Serpong → Tanah Abang.</p>
-      <div class="demo-card">
-        <div class="demo-controls" aria-label="Pilih skenario demo">
-          <button type="button" data-scenario="0" aria-pressed="true">Lancar</button><button type="button" data-scenario="1" aria-pressed="false">Terlambat</button><button type="button" data-scenario="2" aria-pressed="false">Terganggu</button>
+    <section class="stories" id="cerita" aria-label="Cara menggunakan Moobby">
+      <div class="story-sticky">
+        <div class="story-copy">
+          <p class="eyebrow" id="scene-kicker">01 / 06</p>
+          <h2 id="scene-title">lihat perjalananmu dalam satu timeline.</h2>
+          <p id="scene-description">Ikuti urutan stasiun dan bagian rute yang akan kamu lewati.</p>
+          <div class="scene-dots" aria-label="Pilih adegan">
+            <a href="#adegan-timeline" aria-label="Timeline" aria-current="step"></a>
+            <a href="#rute-tersimpan" aria-label="Rute tersimpan"></a>
+            <a href="#simpan" aria-label="Cari rute"></a>
+            <a href="#gangguan" aria-label="Keterlambatan"></a>
+            <a href="#detail" aria-label="Detail gangguan"></a>
+            <a href="#alternatif" aria-label="Alternatif"></a>
+          </div>
         </div>
-        <div class="demo-result" data-tone="ok" aria-live="polite"><span class="eyebrow">SIMULASI · BUKAN KONDISI LIVE</span><h3 id="demo-title">Perjalanan berjalan lancar</h3><p id="demo-copy">Ikuti timeline Green Line menuju Tanah Abang.</p></div>
-        <details class="alternatives"><summary>Lihat pilihan perjalanan</summary><p id="demo-option">Tetap naik KRL sesuai rute yang tersimpan.</p></details>
+        <div class="story-visual">
+          <div class="phone story-phone">
+            <img class="active" src="assets/home.png" alt="Timeline perjalanan" width="1206" height="2622" loading="lazy">
+            <img src="assets/home.png" alt="Rute tersimpan Pergi ke Kantor pada layar Home" width="1206" height="2622" loading="lazy" aria-hidden="true">
+            <img src="assets/search.png" alt="Layar Cari Rute" width="1206" height="2622" loading="lazy" aria-hidden="true">
+            <img src="assets/delayed.png" alt="Home saat ada simulasi gangguan" width="1206" height="2622" loading="lazy" aria-hidden="true">
+            <img src="assets/detail.png" alt="Detail simulasi gangguan Sudimara" width="1206" height="2622" loading="lazy" aria-hidden="true">
+            <img src="assets/alternatives.png" alt="Rekomendasi alternatif perjalanan" width="1206" height="2622" loading="lazy" aria-hidden="true">
+          </div>
+        </div>
+      </div>
+      <div class="story-steps" aria-hidden="true">
+        <div id="adegan-timeline" data-scene="0"></div>
+        <div id="rute-tersimpan" data-scene="1"></div>
+        <div id="simpan" data-scene="2"></div>
+        <div id="gangguan" data-scene="3"></div>
+        <div id="detail" data-scene="4"></div>
+        <div id="alternatif" data-scene="5"></div>
+      </div>
+    </section>
+
+    <section class="features" id="fitur" aria-labelledby="features-heading">
+      <h2 class="section-heading" id="features-heading">jelajahi lebih banyak<br><strong>fitur Moobby</strong></h2>
+      <div class="feature-grid">
+        <a href="#adegan-timeline"><img src="assets/home.png" alt="" loading="lazy"><span>timeline stasiun ↗</span></a>
+        <a href="#simpan"><img src="assets/search.png" alt="" loading="lazy"><span>cari rute ↗</span></a>
+        <a href="#gangguan"><img src="assets/delayed.png" alt="" loading="lazy"><span>status perjalanan ↗</span></a>
+        <a href="#detail"><img src="assets/detail.png" alt="" loading="lazy"><span>detail gangguan ↗</span></a>
+        <a href="#alternatif"><img src="assets/alternatives.png" alt="" loading="lazy"><span>pilihan alternatif ↗</span></a>
+      </div>
+    </section>
+
+    <section class="commute" aria-label="Konteks perjalanan">
+      <h2 class="section-heading">dibuat untuk<br><strong>perjalanan harian</strong></h2>
+      <span class="commute-badge badge-one">🚉 &nbsp; Green Line</span>
+      <span class="commute-badge badge-two">⌖ &nbsp; Cisauk</span>
+      <span class="commute-badge badge-three">◎ &nbsp; Kebayoran</span>
+      <span class="commute-badge badge-four">↔ &nbsp; Pergi &amp; pulang</span>
+    </section>
+
+    <section class="word-story" aria-label="Ringkasan alur perjalanan">
+      <div class="word-sticky">
+        <p>pilih rute <img src="assets/app-icon.png" alt=""> lihat urutan stasiun</p>
+        <p>kenali gangguan <img src="assets/app-icon.png" alt=""> cek dampaknya</p>
+        <p>pertimbangkan alternatif <img src="assets/app-icon.png" alt=""> lanjutkan perjalanan</p>
+      </div>
+    </section>
+
+    <section class="scenarios" id="skenario" aria-labelledby="scenario-heading">
+      <h2 class="section-heading" id="scenario-heading">satu perjalanan,<br><strong>berbagai kemungkinan</strong></h2>
+      <div class="scenario-rows" data-scenario-rows></div>
+      <dialog class="demo" id="demo" aria-labelledby="demo-heading">
+        <form method="dialog"><button class="demo-close" aria-label="Tutup demo" autofocus>×</button></form>
+        <div class="demo-copy"><p class="eyebrow">DEMO · CISAUK → KEBAYORAN</p><h3 id="demo-heading">Coba kondisi perjalanan</h3><p>Contoh ini memperlihatkan bagaimana informasi rute berubah saat kondisi KRL berubah.</p></div>
+        <div class="demo-card">
+          <div class="demo-controls" aria-label="Pilih skenario demo"><button type="button" data-scenario="0" aria-pressed="true">Lancar</button><button type="button" data-scenario="1" aria-pressed="false">Terlambat</button><button type="button" data-scenario="2" aria-pressed="false">Terganggu</button></div>
+          <div class="demo-result" data-tone="ok" aria-live="polite"><span class="eyebrow">SIMULASI</span><h3 id="demo-title">Perjalanan lancar</h3><p id="demo-copy">Ikuti timeline Green Line dari Cisauk ke Kebayoran.</p></div>
+          <details class="alternatives"><summary>Lihat pilihan perjalanan</summary><p id="demo-option">Lanjutkan dengan KRL pada rute yang tersimpan.</p></details>
+        </div>
+      </dialog>
+    </section>
+
+    <section class="about" id="tentang">
+      <h2 class="section-heading">di balik<br><strong>perjalanan Moobby</strong></h2>
+      <div class="about-cards">
+        <article><span aria-hidden="true">⌖</span><h3>Perjalanan</h3><p>Dari stasiun awal ke tujuan sehari-hari.</p></article>
+        <article><img src="assets/app-icon.png" width="95" height="95" alt=""><h3>Moobby</h3><p>Informasi perjalanan dalam satu tampilan.</p></article>
+        <article><span aria-hidden="true">⇄</span><h3>Pilihan</h3><p>Opsi saat perjalanan perlu disesuaikan.</p></article>
       </div>
     </section>
 
     <section class="faq" id="faq">
-      <h2>yang sering<br>ditanyakan</h2>
+      <h2 class="section-heading">yang sering<br><strong>ditanyakan</strong></h2>
       <div class="questions">
-        <details><summary>Apa itu Moobby?</summary><p>Moobby adalah pendamping perjalanan KRL. Di dalamnya kamu bisa menyimpan rute harian dan melihat urutan stasiun dari asal hingga tujuan.</p></details>
-        <details><summary>Apakah demo ini menampilkan kondisi KRL terkini?</summary><p>Demo website memakai skenario ilustratif. Informasi keterlambatan dan gangguan di sini adalah contoh tampilan.</p></details>
-        <details><summary>Apakah perlu mengaktifkan lokasi?</summary><p>Kamu bisa memilih stasiun secara manual. Izin lokasi membantu menampilkan stasiun sekitar ketika fitur itu dipakai.</p></details>
-        <details><summary>Rute apa yang ditampilkan di sini?</summary><p>Contoh demo menggunakan perjalanan KRL Green Line dari Serpong ke Tanah Abang.</p></details>
+        <details><summary>Apa itu Moobby?</summary><p>Moobby membantu kamu menyimpan rute harian dan melihat urutan stasiun KRL dalam satu timeline perjalanan.</p></details>
+        <details><summary>Rute apa yang ditampilkan dalam demo?</summary><p>Demo menggunakan contoh perjalanan Green Line dari Cisauk ke Kebayoran.</p></details>
+        <details><summary>Apakah keterlambatan di website ini adalah laporan terkini?</summary><p>Informasi di demo adalah skenario simulasi yang memperlihatkan tampilan aplikasi dalam beberapa kondisi perjalanan.</p></details>
+        <details><summary>Apakah saya perlu mengaktifkan lokasi?</summary><p>Kamu bisa memilih stasiun secara manual. Izin lokasi membantu Moobby mengenali stasiun di sekitarmu.</p></details>
+        <details><summary>Bagaimana jika ada gangguan di rute saya?</summary><p>Buka detail gangguan untuk melihat dampaknya pada perjalanan dan mempertimbangkan opsi perjalanan lain.</p></details>
       </div>
     </section>
+
     <section class="final">
-      <div class="final-mark" aria-hidden="true"><img src="mark.svg" width="88" height="88" alt=""></div>
-      <h2>berangkat lebih siap<br>bareng Moobby</h2>
-      <a class="pill light" href="#demo">Coba demo Moobby</a>
+      <h2 class="section-heading">satu langkah lebih siap<br><strong>sebelum berangkat</strong></h2>
+      <div class="final-decoration" aria-hidden="true"><span>✦</span><span>✧</span><img src="assets/app-icon.png" width="128" height="128" alt=""><span>✦</span><span>✧</span></div>
+      <a class="pill" href="#demo" aria-haspopup="dialog">Coba demo Moobby!</a>
     </section>
   </main>
-  <footer><a class="brand" href="#top"><img src="mark.svg" width="36" height="36" alt="">Moobby</a><span>Teman perjalanan KRL</span><a href="#top">Kembali ke atas ↑</a></footer>
+
+  <footer>
+    <div class="footer-brand"><a class="brand" href="#top"><img src="assets/app-icon.png" width="40" height="40" alt="">Moobby</a><p>Teman perjalanan KRL harian.</p></div>
+    <div><h3>fitur</h3><a href="#timeline">Timeline</a><a href="#gangguan">Gangguan</a><a href="#alternatif">Alternatif</a></div>
+    <div><h3>jelajahi</h3><a href="#demo">Demo</a><a href="#tentang">Tentang</a><a href="#faq">FAQ</a></div>
+    <div><h3>Moobby</h3><a href="#top">Kembali ke atas ↑</a></div>
+  </footer>
 </body>
 </html>
