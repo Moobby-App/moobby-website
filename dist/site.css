@@ -307,9 +307,9 @@ summary { cursor: pointer; }
 .scenario-rows .ticker:nth-child(2) .ticker-track { animation-direction: reverse; animation-duration: 68s; animation-delay: -17s; }
 .scenario-rows .ticker-group { gap: 36px; padding-right: 36px; }
 .scenario-card {
-  --capsule-a: #a9c9eb;
-  --capsule-b: #d9ecff;
-  --capsule-c: #c2daf3;
+  --capsule-a: #759fc8;
+  --capsule-b: #b2cce5;
+  --capsule-c: #94b6d8;
   width: clamp(430px, 44.6vw, 660px);
   min-height: 184px;
   position: relative;
@@ -322,20 +322,20 @@ summary { cursor: pointer; }
   border-radius: 999px;
   background:
     radial-gradient(ellipse at 14% 16%, var(--capsule-a), transparent 64%),
-    radial-gradient(ellipse at 82% 18%, #edf6ff, transparent 62%),
+    radial-gradient(ellipse at 82% 18%, #d6e6f5, transparent 62%),
     radial-gradient(ellipse at 85% 100%, var(--capsule-b), transparent 64%),
     var(--capsule-c);
-  box-shadow: inset 0 0 11px 4px #f4faffaa;
-  color: #173b5d;
+  box-shadow: inset 0 0 11px 4px #e0eef780;
+  color: #102b45;
   text-align: center;
 }
-.scenario-card:nth-child(4n+2) { --capsule-a: #b0cee7; --capsule-b: #c1dcf7; --capsule-c: #d2e5f8; }
-.scenario-card:nth-child(4n+3) { --capsule-a: #a9bfe7; --capsule-b: #d4e3fc; --capsule-c: #c3d7f0; }
-.scenario-card:nth-child(4n+4) { --capsule-a: #b9d9ee; --capsule-b: #c4d8ef; --capsule-c: #d8edfc; }
+.scenario-card:nth-child(4n+2) { --capsule-a: #81a9c8; --capsule-b: #9fbfdd; --capsule-c: #aac8e3; }
+.scenario-card:nth-child(4n+3) { --capsule-a: #7b99c5; --capsule-b: #b4c8ea; --capsule-c: #95afd5; }
+.scenario-card:nth-child(4n+4) { --capsule-a: #88b4ce; --capsule-b: #9bb6d4; --capsule-c: #aecce4; }
 .scenario-rows .ticker:nth-child(2) .scenario-card:nth-child(odd) {
-  --capsule-a: #b2cbea;
-  --capsule-b: #a9cce9;
-  --capsule-c: #d6e8fa;
+  --capsule-a: #7d9fc6;
+  --capsule-b: #86aece;
+  --capsule-c: #a8c5e2;
 }
 .scenario-card::before {
   content: "";
@@ -354,9 +354,9 @@ summary { cursor: pointer; }
   right: -37px;
   width: 38px;
   height: 10px;
-  background: linear-gradient(90deg, var(--capsule-c), #c0d6ee);
+  background: linear-gradient(90deg, var(--capsule-c), #93b2d1);
 }
-.scenario-kicker { color: #335d80; font-size: .67rem; font-weight: 680; letter-spacing: .14em; line-height: 1.3; text-transform: uppercase; }
+.scenario-kicker { color: #1b405f; font-size: .67rem; font-weight: 680; letter-spacing: .14em; line-height: 1.3; text-transform: uppercase; }
 .scenario-card b { font-size: 1.19rem; font-weight: 650; letter-spacing: -.024em; }
 .scenario-card p { max-width: 42ch; font-size: .94rem; line-height: 1.48; }
 @media (hover: hover) {
