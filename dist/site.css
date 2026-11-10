@@ -97,7 +97,7 @@ summary { cursor: pointer; }
 .showcase-brand span { font-size: clamp(1.45rem, 4.2vw, 3.55rem); font-weight: 720; letter-spacing: -.05em; }
 .showcase-brand small { color: #365b81; font-size: .72rem; letter-spacing: .12em; margin-top: 6px; }
 .showcase-brand strong { font-size: clamp(.92rem, 1.7vw, 1.32rem); }
-.showcase-main, .showcase-side { position: absolute; width: 28%; height: auto; border: 6px solid #24334a; border-radius: 24px; box-shadow: 0 14px 40px #17395b45; }
+.showcase .iphone { position: absolute; width: 28%; --iphone-bezel: 5px; --iphone-radius: 29px; }
 .showcase-main { top: 8%; left: 40%; z-index: 1; transform: rotate(-7deg); }
 .showcase-side { top: 17%; left: 66%; transform: rotate(10deg); }
 
@@ -114,8 +114,38 @@ summary { cursor: pointer; }
 .timeline { background: #f9fcff; padding: 115px 20px 0; }
 .timeline-stage { height: max(790px, 87vh); margin: 60px auto 0; position: relative; }
 .timeline-sticky { position: sticky; top: 108px; width: min(316px, 55vw, 38vh); margin: auto; }
-.phone { position: relative; overflow: hidden; border: 9px solid #202734; border-radius: clamp(24px, 4vw, 42px); background: #f4f8fd; box-shadow: 0 0 0 2px #74849b, 0 24px 55px #1847783b; aspect-ratio: 1206 / 2622; }
-.phone img { width: 100%; height: 100%; object-fit: cover; }
+.iphone {
+  --iphone-bezel: clamp(5px, .6vw, 8px);
+  --iphone-radius: clamp(29px, 3.2vw, 47px);
+  position: relative;
+  padding: var(--iphone-bezel);
+  border: 1px solid #738092;
+  border-radius: var(--iphone-radius);
+  background: #0b0e14;
+  box-shadow: 0 0 0 1px #152031, 0 19px 46px #18477838;
+}
+.iphone-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1206 / 2622;
+  overflow: hidden;
+  border-radius: calc(var(--iphone-radius) - var(--iphone-bezel) - 1px);
+  background: #f4f8fd;
+}
+.iphone-screen img { width: 100%; height: 100%; object-fit: contain; }
+.iphone-screen::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 1.2%;
+  left: 50%;
+  width: 30%;
+  aspect-ratio: 3.55;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle at 84% 50%, #141b2d 0, #0b101d 5%, #050507 9%);
+  pointer-events: none;
+}
 .flight-card {
   position: absolute; left: 9%; top: var(--dest-y); width: 82%; padding: 10px 11px;
   transform: translate(var(--from-x), var(--from-y)); background: var(--hue);
@@ -144,8 +174,8 @@ summary { cursor: pointer; }
 .feature-grid { max-width: 1280px; margin: 48px auto 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
 .feature-grid a { position: relative; display: grid; align-content: start; min-height: 240px; max-height: 345px; overflow: hidden; border-radius: 24px; padding: 22px 12px 52px; background: #e5f0ff; }
 .feature-grid a:nth-child(even) { background: #d8ecff; }
-.feature-grid img { width: 72%; max-width: 145px; margin: auto; border: 4px solid #29344b; border-radius: 15px; transform: rotate(-8deg) translateY(8px); transition: transform .3s; }
-.feature-grid a:hover img { transform: rotate(0) translateY(0); }
+.feature-phone { width: 72%; max-width: 145px; margin: auto; --iphone-bezel: 3px; --iphone-radius: 19px; transform: rotate(-8deg) translateY(8px); transition: transform .3s; }
+.feature-grid a:hover .feature-phone { transform: rotate(0) translateY(0); }
 .feature-grid a span { position: absolute; inset: auto 0 0; padding: 13px 8px; background: #f0f7ffeb; color: var(--navy); text-align: center; font-weight: 720; font-size: .94rem; }
 
 .commute { min-height: 520px; overflow: hidden; display: grid; place-items: center; position: relative; isolation: isolate; background: #76aee7; }
@@ -239,8 +269,8 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
   .showcase-brand { left: 0; right: 0; top: 4%; justify-items: center; text-align: center; gap: 4px; }
   .showcase-brand img { width: 40px; height: 40px; }
   .showcase-brand small { letter-spacing: .05em; font-size: .62rem; }
-  .showcase-main, .showcase-side { border-width: 4px; border-radius: 16px; }
-  .showcase-main { width: min(66%, 245px); top: 28%; left: 50%; transform: translateX(-50%) rotate(-5deg); }
+  .showcase .iphone { --iphone-bezel: 5px; --iphone-radius: 30px; }
+  .showcase .showcase-main { width: min(66%, 245px); top: 28%; left: 50%; transform: translateX(-50%) rotate(-5deg); }
   .showcase-side { display: none; }
   .section-heading { font-size: clamp(36px, 9.1vw, 55px); }
   .overview { min-height: 456px; padding: 65px 0; }
