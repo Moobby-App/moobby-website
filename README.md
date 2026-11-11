@@ -1,50 +1,90 @@
 # Moobby Website
 
-Website branding Moobby untuk memperkenalkan aplikasi pendamping komuter KRL. Pesan utamanya adalah **lebih siap berangkat** dengan kabar gangguan terkurasi yang relevan dengan rute perjalanan.
+Landing page Moobby, aplikasi pendamping komuter KRL. Website ini memakai **Next.js 16 App Router, React 19, dan TypeScript**, dengan CSS responsif dan aset lokal.
 
 ## Menjalankan di lokal
 
-Website ini memakai HTML, CSS, dan JavaScript statis. Jalankan dari direktori repo:
+Butuh Node.js 20.9 atau lebih baru dan npm. Dari folder proyek:
 
 ```sh
-python3 -m http.server 8080 --bind 127.0.0.1 --directory dist
+npm install
+npm run dev
 ```
 
-Buka `http://127.0.0.1:8080/` di browser. Untuk hosting statis, gunakan `dist/` sebagai direktori publik.
+Buka **http://127.0.0.1:3000**. Tidak perlu login, API key, atau database. Biarkan Terminal terbuka; tekan **Control + C** untuk menghentikan server.
+
+Jika port 3000 dipakai:
+
+```sh
+npm run dev -- --port 3001
+```
+
+Lalu buka http://127.0.0.1:3001.
+
+## Build produksi dan pemeriksaan
+
+```sh
+npm run check
+npm run build
+npm run test:migration
+```
+
+`test:migration` memerlukan hasil build terbaru. Pemeriksaan memastikan anchor lama tetap tersedia, struktur konten penting tetap ada, serta aset yang dipindahkan identik dan dapat ditemukan. Ini tidak menggantikan pengujian interaksi atau tampilan di browser.
+
+Untuk menjalankan hasil build:
+
+```sh
+npm start
+```
+
+Halaman utama dirender statis saat build. Deployment Next.js menggunakan `npm run build` dan `npm start`; folder `dist/` adalah versi lama, bukan hasil build Next.js.
 
 ## Struktur proyek
 
 | Lokasi | Isi |
 | --- | --- |
-| `dist/index.html` | Struktur halaman, copy branding, navigasi, FAQ, dan dialog kondisi perjalanan |
-| `dist/site.css` | Tata letak responsif, palet biru, frame perangkat, ilustrasi tim, dan animasi |
-| `dist/site.js` | Pemilihan video responsif, animasi scroll, pergantian adegan, dialog, dan interaksi tim |
-| `dist/assets/` | Video KRL versi desktop dan ponsel, poster, layar Moobby, frame iPhone, ilustrasi, ikon aplikasi, dan font |
-| `CHANGELOG.md` | Ringkasan urutan iterasi website |
+| `app/page.tsx` | Susunan bagian landing page |
+| `app/layout.tsx` | Bahasa, metadata SEO, Open Graph, dan stylesheet |
+| `app/globals.css` | Tampilan, responsivitas, dan reduced motion |
+| `components/navigation.tsx` | Menu desktop/ponsel dan keyboard |
+| `components/hero.tsx` | Video responsif, putar/jeda, dan suara |
+| `components/intro.tsx` | Headline berganti |
+| `components/stories.tsx` | Enam adegan dan navigasi hash |
+| `components/travel-demo.tsx` | Dialog tiga kondisi perjalanan |
+| `components/scenarios.tsx` | Kartu skenario dan kontrol jeda |
+| `components/team.tsx` | Nama dan peran anggota tim |
+| `components/scroll-effects.tsx` | Animasi kereta, kartu timeline, dan teks |
+| `components/sections.tsx` | Bagian statis, FAQ native, dan footer |
+| `lib/use-media-query.ts` | Preferensi media yang aman untuk server rendering |
+| `public/assets/` | Video, poster, screenshot, ilustrasi, dan font |
+| `dist/` | Cadangan website statis sebelum migrasi |
 
-## Bagian yang bisa ditinjau
+Interaksi memakai state React. Event listener, observer, timer, dan animation frame dibersihkan saat komponen dilepas agar tidak berlipat saat development/Fast Refresh. Transformasi dekoratif saat scroll diperbarui lewat requestAnimationFrame.
 
-| Bagian | Anchor | Perilaku |
-| --- | --- | --- |
-| Video pembuka | `#top` | Video peron KRL responsif dengan kontrol putar dan suara |
-| Lebih siap berangkat | `#kenalan` | Headline berganti dan satu kereta melintas di belakang iPhone saat scroll |
-| Fitur unggulan | `#overview-heading` | Lima ikon bulat dengan gradasi biru yang menaut ke fitur terkait |
-| Timeline | `#timeline` | Enam kartu meluncur ke posisi masing-masing di layar iPhone pada desktop |
-| Kondisi perjalanan | `#cerita` | Enam adegan aplikasi, berganti saat scroll di desktop atau lewat titik navigasi di ponsel |
-| Fitur lanjutan | `#fitur` | Pratinjau layar dan tautan ke adegan terkait |
-| Skenario | `#skenario` | Dua baris kapsul bertekstur yang bergerak berlawanan arah |
-| Tim | `#tentang` | Lima ilustrasi. Nama dan peran muncul saat hover, fokus keyboard, atau ketuk |
-| FAQ | `#faq` | Jawaban yang dapat dibuka dari tiap pertanyaan |
+## Pemeriksaan manual sebelum rilis
 
-Tombol **Lihat kondisi perjalanan** membuka pilihan kondisi lancar, terlambat, dan terganggu. Status dan waktu yang tampil berasal dari cuplikan aplikasi Moobby. Data kondisi KRL terkini tersedia melalui aplikasi sesuai ketersediaan laporan.
+- Desktop dan ponsel: video, putar/jeda, suara, serta perpindahan ukuran layar.
+- Menu: buka/tutup, pilih tautan, klik di luar, dan Escape.
+- Desktop: posisi kartu timeline dan perpindahan keenam adegan saat scroll.
+- Ponsel: titik navigasi, tautan fitur, deep link, serta Back/Forward browser.
+- Dialog: semua tombol pembuka, tiga kondisi, pilihan perjalanan, Escape, klik backdrop, dan fokus kembali ke pemicu.
+- Jeda animasi skenario lewat keyboard dan sentuhan, label tim, dan FAQ.
+- Layar sempit, zoom, serta reduced motion sejak awal maupun saat halaman terbuka.
+
+Status dan waktu pada demo adalah cuplikan aplikasi, bukan data kondisi KRL terkini. Website tidak terhubung ke API perjalanan.
+
+## Cadangan sebelum migrasi
+
+Versi asli di `dist/` tidak diubah. Untuk membandingkan atau memakai versi lama sementara:
+
+```sh
+python3 -m http.server 8080 --bind 127.0.0.1 --directory dist
+```
+
+Buka http://127.0.0.1:8080. Perubahan di komponen Next.js tidak disalin ke cadangan ini.
 
 ## Aset
 
-Video peron bersumber dari rekaman yang diberikan untuk proyek. Tampilan aplikasi memakai materi Moobby, termasuk screenshot Simulator dan cuplikan kondisi perjalanan. Frame iPhone berasal dari PNG yang diberikan. Ilustrasi tim merupakan karakter bergaya gouache yang dibuat dengan ImageGen. Font Inter disertai [lisensi SIL Open Font License](dist/assets/inter-OFL.txt).
+Video peron dan screenshot berasal dari materi proyek Moobby. Frame iPhone memakai PNG yang diberikan. Ilustrasi tim dibuat dengan ImageGen. Font Inter disertai [lisensi SIL Open Font License](public/assets/inter-OFL.txt).
 
-## Pemeriksaan sebelum merilis perubahan
-
-- Cek video dan tombol putar serta suara di desktop dan ponsel.
-- Gulir bagian kereta dan timeline. Pastikan keenam kartu mendarat di posisi yang sesuai.
-- Coba perpindahan adegan, tiga kondisi perjalanan, label tim, dan FAQ.
-- Cek ulang layout pada layar sempit serta preferensi kurangi gerakan.
+Referensi framework: [instalasi Next.js](https://nextjs.org/docs/app/getting-started/installation).

@@ -1,5 +1,13 @@
 # Riwayat website Moobby
 
+## 11 November 2026
+
+- Migrasi landing page ke Next.js App Router, React, dan TypeScript; versi statis asli tetap tersedia di `dist/`.
+- Pisahkan konten dan interaksi menjadi komponen, dengan cleanup event listener, observer, timer, dan animasi.
+- Pertahankan anchor, aset, video responsif, enam adegan, demo perjalanan, tim, dan FAQ.
+- Tambahkan label demo, kontrol jeda skenario, metadata berbagi dasar, serta perbaikan teks reduced motion.
+- Tambahkan pemeriksaan regresi struktur hasil build dan integritas aset, serta panduan menjalankan lokal.
+
 ## 10 November 2026
 
 Urutan berikut mengikuti riwayat pengembangan di branch utama.
