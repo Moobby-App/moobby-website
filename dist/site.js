@@ -57,7 +57,7 @@ function updateVideo() {
 
 function selectVideo() {
   const position = video.currentTime;
-  video.src = mobile.matches ? "assets/peron-mobile.mp4" : "assets/peron-desktop.mp4";
+  video.src = "assets/moobby-promo.mp4";
   video.addEventListener("loadedmetadata", () => {
     if (position > 0 && position < video.duration) video.currentTime = position;
   }, { once: true });
