@@ -41,11 +41,11 @@ document.addEventListener("keydown", event => {
   }
 });
 
-let videoVisible = true;
 let playbackRequested = !reduceMotion.matches;
+const heroControls = document.querySelector(".hero-controls");
 
 function updateVideo() {
-  if (videoVisible && playbackRequested) {
+  if (playbackRequested) {
     video.play().catch(() => {
       play.setAttribute("aria-label", "Putar video");
       play.setAttribute("aria-pressed", "false");
@@ -86,8 +86,7 @@ reduceMotion.addEventListener("change", () => {
   updateVideo();
 });
 new IntersectionObserver(([entry]) => {
-  videoVisible = entry.isIntersecting;
-  updateVideo();
+  heroControls.classList.toggle("is-floating", !entry.isIntersecting);
 }, { threshold: 0.15 }).observe(video);
 selectVideo();
 

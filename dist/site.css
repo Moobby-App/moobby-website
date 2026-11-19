@@ -75,6 +75,7 @@ summary { cursor: pointer; }
 .hero-shade { background: linear-gradient(180deg, #0b172f54, transparent 24%, transparent 66%, #0b172f59); pointer-events: none; }
 .hero-down { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: transparent; }
 .hero-controls { position: absolute; right: 23px; bottom: 22px; display: flex; gap: 6px; }
+.hero-controls.is-floating { position: fixed; z-index: 30; right: 18px; bottom: 18px; padding: 6px; border: 1px solid #ffffff40; border-radius: 999px; background: #173b5ae8; box-shadow: 0 8px 28px #102c4666; backdrop-filter: blur(12px); }
 #play-toggle .pause-icon, #sound-toggle .sound-on { display: none; }
 #play-toggle[aria-pressed="true"] .pause-icon, #sound-toggle[aria-pressed="true"] .sound-on { display: block; }
 #play-toggle[aria-pressed="true"] .play-icon, #sound-toggle[aria-pressed="true"] .sound-off { display: none; }
