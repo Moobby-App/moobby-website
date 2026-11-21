@@ -475,7 +475,10 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
   .nav nav > a:not(.pill), .nav-features summary { padding: 11px 7px; }
   .nav-features div { position: static; box-shadow: none; background: #17365a70; }
   .nav-cta { margin-top: 8px; min-height: 46px; font-size: 1.05rem; }
-  .hero-controls { bottom: 22px; right: 22px; }
+  .hero { height: auto; min-height: 0; aspect-ratio: 16 / 9; }
+  .hero video { object-fit: contain; }
+  .hero-controls { bottom: 12px; right: 12px; }
+  .hero-down { bottom: 8px; }
   .intro { padding: 103px 14px 0; }
   .intro h1 { font-size: clamp(33px, 10.75vw, 54px); }
   .intro p { margin: 35px auto 23px; }
