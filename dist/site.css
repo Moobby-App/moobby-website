@@ -466,6 +466,7 @@ footer p, footer a:not(.brand) { color: #dfecfb; font-size: .9rem; }
 
 @media (max-width: 809px) {
   :root { --nav-height: 67px; }
+  body { background: var(--sky); }
   html { scroll-padding-top: 83px; }
   .nav { padding: 9px 15px; }
   main { background: var(--sky); }

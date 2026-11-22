@@ -249,6 +249,26 @@ function setScene(index) {
   }
 }
 
+const storySticky = document.querySelector(".story-sticky");
+let swipeStartX = 0;
+let swipeStartY = 0;
+storySticky.addEventListener("touchstart", event => {
+  const touch = event.changedTouches[0];
+  swipeStartX = touch.clientX;
+  swipeStartY = touch.clientY;
+}, { passive: true });
+storySticky.addEventListener("touchend", event => {
+  if (!mobile.matches) return;
+  const touch = event.changedTouches[0];
+  const deltaX = touch.clientX - swipeStartX;
+  const deltaY = touch.clientY - swipeStartY;
+  if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+  const nextIndex = Math.max(0, Math.min(scenes.length - 1, sceneIndex + (deltaX < 0 ? 1 : -1)));
+  if (nextIndex === sceneIndex) return;
+  setScene(nextIndex);
+  history.replaceState(null, "", `#${steps[nextIndex].id}`);
+}, { passive: true });
+
 const clampUnit = value => Math.max(0, Math.min(1, value));
 const ease = value => value * value * (3 - 2 * value);
 let trainProgress;
